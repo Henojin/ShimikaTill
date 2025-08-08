@@ -8,6 +8,10 @@ Visual Studio 2022だと標準で対応していないため、<br>
 https://qiita.com/diontools/items/b193ae8394161fc26698#net-framework-4--45-%E3%81%AE%E5%A0%B4%E5%90%88<br>
 こちらを参考に導入してください。
 
+<h1>動作要件</h1>
+OS : Windows Embedded POSReady 2009以上<br>
+RAM: 1GB以上<br>
+液晶解像度 : 800*600以上<br>
 
 # 開発者
 ・とまにゃ（@bipo_ta）<br>
