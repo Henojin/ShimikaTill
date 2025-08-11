@@ -1,5 +1,5 @@
 # ShimikaTill
-
+<img width="1200" height="900" alt="image" src="https://github.com/user-attachments/assets/d1d8820b-c348-4587-94d9-eb485ea04624" />
 POSもどきなのです。
 ダンボールあたたかいです。
 
