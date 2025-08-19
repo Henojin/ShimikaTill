@@ -63,9 +63,9 @@ namespace ShimikaTill.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap back {
+        internal static System.Drawing.Bitmap back2 {
             get {
-                object obj = ResourceManager.GetObject("back", resourceCulture);
+                object obj = ResourceManager.GetObject("back2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

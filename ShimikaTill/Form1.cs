@@ -20,10 +20,13 @@ namespace ShimikaTill
         {
             ClockTimer.Start();
             this.Location = new Point(0, 0);
+            JanTextBox.Text = "JANを入力";
         }
 
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
+            DateTime date = DateTime.Now;
+            Hiduke.Text = date.Month + "月" + date.Day + "日";
             ClockLabel.Text = DateTime.Now.ToShortTimeString();
         }
 

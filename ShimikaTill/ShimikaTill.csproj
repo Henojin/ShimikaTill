@@ -76,9 +76,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\閉じる.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ItemBt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\閉じる.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
