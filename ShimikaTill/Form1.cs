@@ -54,5 +54,11 @@ namespace ShimikaTill
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            info info = new info();
+            info.Show();
+        }
     }
 }
