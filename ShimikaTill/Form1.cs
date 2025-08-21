@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Media;
 
 namespace ShimikaTill
 {
@@ -15,6 +16,12 @@ namespace ShimikaTill
         {
             InitializeComponent();
         }
+
+        bool isformopen = false;
+
+
+
+        info info = new info();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -57,8 +64,15 @@ namespace ShimikaTill
 
         private void button2_Click(object sender, EventArgs e)
         {
-            info info = new info();
-            info.Show();
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            player.Play(); // 非同期で再生
+            info.ShowDialog();
+
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+
         }
     }
 }

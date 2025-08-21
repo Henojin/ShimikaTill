@@ -201,6 +201,15 @@ namespace ShimikaTill.Properties {
         }
         
         /// <summary>
+        ///   System.IO.MemoryStream に類似した型 System.IO.UnmanagedMemoryStream のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream sound_alert {
+            get {
+                return ResourceManager.GetStream("sound_alert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
         internal static System.Drawing.Bitmap 閉じる {
