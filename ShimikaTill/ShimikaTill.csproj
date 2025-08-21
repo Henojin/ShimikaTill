@@ -90,5 +90,32 @@
   <ItemGroup>
     <None Include="Resources\閉じる.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button-orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button-grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button-orange2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button-yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button-red1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
