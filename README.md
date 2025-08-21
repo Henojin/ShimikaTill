@@ -1,8 +1,8 @@
 <img width="1280" height="350" alt="ShimikaTill" src="https://github.com/user-attachments/assets/499ba525-0d7d-4766-aa4b-cc10f945b2e7" />
 
 # ShimikaTill
-POSもどきです。東芝テックのUIから構想を得て作っています
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/74e0c136-6553-4c55-b7da-64c9ac03d387" />
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/a9328ccb-4bc7-4d78-bb22-92a12b451a5b" />
+
 # .NET Framework 4が必要です
 .NET Freamwork 4はWindows XP等の古いOSには標準搭載されていないため、<br>
 https://www.microsoft.com/ja-jp/download/details.aspx?id=17718<br>
