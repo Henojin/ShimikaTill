@@ -18,7 +18,11 @@ namespace ShimikaTill
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(70, 90);
+            int sch = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            int scw = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            int windowx = scw / 2 - 320;
+            int windowy = sch / 2 - 180;
+            this.Location = new Point(windowx, windowy);
         }
     }
 }

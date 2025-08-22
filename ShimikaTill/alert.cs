@@ -12,10 +12,15 @@ namespace ShimikaTill
     public partial class alert : Form
     {
         private string dialogmess; //引数を受け取って入れるための変数
-        public alert(string dialogmess)
+        int mfx;
+        int mfy;
+
+        public alert(string dialogmess,int mfx ,int mfy)
         {
             InitializeComponent();
             this.dialogmess = dialogmess;　//プライベートな変数に受け取った引数を代入。
+            this.mfx = mfx;
+            this.mfy = mfy;
         }
 
         private void nobutton_Click(object sender, EventArgs e)
@@ -31,7 +36,15 @@ namespace ShimikaTill
 
         private void alert_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(120, 200);
+            int sch = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            int scw = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            if (scw == 800 && sch == 600) { 
+                this.Location = new Point(120, 200);
+            }
+            else
+            {
+                this.Location = new Point(mfx + 120, mfy + 200);
+            }
             AlertMessage.Text = dialogmess;　//表示
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace ShimikaTill
 {
-    partial class ShimikaTill
+    partial class ShimikaTillForm
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShimikaTill));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShimikaTillForm));
             this.ClockLabel = new System.Windows.Forms.Label();
             this.ClockTimer = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
@@ -300,7 +300,7 @@
             this.list.TabIndex = 21;
             this.list.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // ShimikaTill
+            // ShimikaTillForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -332,10 +332,14 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "ShimikaTill";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ShimikaTillForm";
             this.Text = "ShimikaTill";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ShimikaTillForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ShimikaTillForm_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();
 

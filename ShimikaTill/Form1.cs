@@ -10,16 +10,17 @@ using System.Media;
 
 namespace ShimikaTill
 {
-    public partial class ShimikaTill : Form
+    
+    public partial class ShimikaTillForm : Form
     {
         static string infodialogmessage;
-        public static bool exityesorno;
-        public ShimikaTill()
+        private Point mousePoint;
+        public ShimikaTillForm()
         {
             InitializeComponent();
         }
 
-        bool isformopen = false;
+     
 
 
 
@@ -27,9 +28,15 @@ namespace ShimikaTill
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            int sch = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            int scw = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+           if (scw == 800 && sch == 600)
+            {
+                this.Location = new Point(0, 0);
+             
+            }
             ClockTimer.Interval = 1000; //1秒に1回実行
             ClockTimer.Start(); //タイマーを開始
-            this.Location = new Point(0, 0);
             JanTextBox.Text = "JANを入力";
         }
 
@@ -38,13 +45,23 @@ namespace ShimikaTill
             DateTime date = DateTime.Now;
             Hiduke.Text = date.Month + "月" + date.Day + "日";
             ClockLabel.Text = (date.ToString("HH" + ":" + date.ToString("mm")));
+            //力技解決の例、ﾖｸﾅｲﾖ
+            int sch = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            int scw = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            if (scw == 800 && sch == 600)
+            {
+                this.Location = new Point(0, 0);
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             infodialogmessage = "終了しますか？\n店員以外はこの操作を行わないでください。"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var alertform = new alert(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var alertform = new alert(infodialogmessage,mfx,mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             if (alertform.ShowDialog() == DialogResult.OK) { 
                 this.Close();
@@ -55,7 +72,9 @@ namespace ShimikaTill
         {
             infodialogmessage = "会計しますか？"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var alertform = new alert(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             alertform.ShowDialog(); //表示
         }
@@ -79,7 +98,9 @@ namespace ShimikaTill
         {
             infodialogmessage = "業務選択ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var infoform = new info(infodialogmessage,mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
 
@@ -94,7 +115,9 @@ namespace ShimikaTill
         {
             infodialogmessage = "値引ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
         }
@@ -103,7 +126,9 @@ namespace ShimikaTill
         {
             infodialogmessage = "税区分ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
         }
@@ -112,7 +137,9 @@ namespace ShimikaTill
         {
             infodialogmessage = "領収書ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
         }
@@ -123,7 +150,9 @@ namespace ShimikaTill
             {
                 infodialogmessage = "選択項目を取り消しますか？"; //infoダイアログに表示させるメッセージを代入。
                 SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-                var alertform = new alert(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+                int mfx = this.Location.X;
+                int mfy = this.Location.Y;
+                var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
                 player.Play(); // 非同期で再生
                 if (alertform.ShowDialog() == DialogResult.OK)
                 {
@@ -136,7 +165,9 @@ namespace ShimikaTill
 
                 infodialogmessage = "取消する項目がありません。"; //infoダイアログに表示させるメッセージを代入。
                 SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-                var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+                int mfx = this.Location.X;
+                int mfy = this.Location.Y;
+                var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
                 player.Play(); // 非同期で再生
                 infoform.ShowDialog();　//表示
             }
@@ -146,7 +177,9 @@ namespace ShimikaTill
         {
             infodialogmessage = "返品/返金ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
         }
@@ -188,6 +221,22 @@ namespace ShimikaTill
         private void JanTextBox_Enter(object sender, EventArgs e)
         {
             JanTextBox.Text = null;
+        }
+
+        private void ShimikaTillForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                mousePoint = new Point(e.X, e.Y);
+            }
+        }
+
+        private void ShimikaTillForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left){
+                this.Left += e.X - mousePoint.X;
+                this.Top += e.Y - mousePoint.Y;
+            }
         }
     }
 }

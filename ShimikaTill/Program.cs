@@ -16,14 +16,13 @@ namespace ShimikaTill
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             SplashScreen splashScreen = new SplashScreen();
             splashScreen.Show();
             splashScreen.Refresh();
             Thread.Sleep(2000);
             splashScreen.Close();
 
-            Application.Run(new ShimikaTill());
+            Application.Run(new ShimikaTillForm());
         }
     }
 }
