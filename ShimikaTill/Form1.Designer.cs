@@ -157,6 +157,8 @@
             this.JanTextBox.Name = "JanTextBox";
             this.JanTextBox.Size = new System.Drawing.Size(622, 36);
             this.JanTextBox.TabIndex = 10;
+            this.JanTextBox.TextChanged += new System.EventHandler(this.JanTextBox_TextChanged);
+            this.JanTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.JanTextBox_KeyDown);
             // 
             // Hiduke
             // 
@@ -290,9 +292,9 @@
             this.list.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list.FormattingEnabled = true;
             this.list.ItemHeight = 31;
-            this.list.Location = new System.Drawing.Point(125, 116);
+            this.list.Location = new System.Drawing.Point(124, 109);
             this.list.Name = "list";
-            this.list.Size = new System.Drawing.Size(667, 345);
+            this.list.Size = new System.Drawing.Size(667, 376);
             this.list.TabIndex = 21;
             this.list.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 

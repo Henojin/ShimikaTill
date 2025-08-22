@@ -139,5 +139,28 @@ namespace ShimikaTill
         {
 
         }
+
+        private void JanTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void JanTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (JanTextBox.Text != "")
+                {
+                    list.Items.Add(JanTextBox.Text);//アイテムついか
+                    JanTextBox.Text = null; //テキストボックスを空にする
+                    list.SelectedIndex = list.Items.Count - 1; //最後に入力したアイテムにフォーカスを合わせ、スクロール。
+                }
+                else
+                {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+                    player.Play();
+                }
+            }
+        }
     }
 }
