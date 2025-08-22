@@ -179,5 +179,15 @@ namespace ShimikaTill
                 }
             }
         }
+
+        private void JanTextBox_Leave(object sender, EventArgs e)
+        {
+            JanTextBox.Text = "JANを入力";
+        }
+
+        private void JanTextBox_Enter(object sender, EventArgs e)
+        {
+            JanTextBox.Text = null;
+        }
     }
 }

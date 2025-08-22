@@ -158,7 +158,9 @@
             this.JanTextBox.Size = new System.Drawing.Size(622, 36);
             this.JanTextBox.TabIndex = 10;
             this.JanTextBox.TextChanged += new System.EventHandler(this.JanTextBox_TextChanged);
+            this.JanTextBox.Enter += new System.EventHandler(this.JanTextBox_Enter);
             this.JanTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.JanTextBox_KeyDown);
+            this.JanTextBox.Leave += new System.EventHandler(this.JanTextBox_Leave);
             // 
             // Hiduke
             // 
