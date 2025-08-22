@@ -10,11 +10,11 @@ using System.Media;
 
 namespace ShimikaTill
 {
-    public partial class Form1 : Form
+    public partial class ShimikaTill : Form
     {
         static string infodialogmessage;
         public static bool exityesorno;
-        public Form1()
+        public ShimikaTill()
         {
             InitializeComponent();
         }

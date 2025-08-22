@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(alert));
             this.nobutton = new System.Windows.Forms.Button();
             this.yesbutton = new System.Windows.Forms.Button();
             this.AlertMessage = new System.Windows.Forms.Label();
@@ -85,6 +86,7 @@
             this.Controls.Add(this.yesbutton);
             this.Controls.Add(this.nobutton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "alert";
             this.Text = "alert";
             this.Load += new System.EventHandler(this.alert_Load);
