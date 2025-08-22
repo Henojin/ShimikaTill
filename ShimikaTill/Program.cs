@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ShimikaTill
@@ -15,6 +16,13 @@ namespace ShimikaTill
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            SplashScreen splashScreen = new SplashScreen();
+            splashScreen.Show();
+            splashScreen.Refresh();
+            Thread.Sleep(2000);
+            splashScreen.Close();
+
             Application.Run(new ShimikaTill());
         }
     }

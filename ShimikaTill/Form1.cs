@@ -119,11 +119,26 @@ namespace ShimikaTill
 
         private void button6_Click(object sender, EventArgs e)
         {
-            infodialogmessage = "取消ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
-            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
-            player.Play(); // 非同期で再生
-            infoform.ShowDialog();　//表示
+           if(list.SelectedIndex != -1)
+            {
+                infodialogmessage = "選択項目を取り消しますか？"; //infoダイアログに表示させるメッセージを代入。
+                SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+                var alertform = new alert(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+                player.Play(); // 非同期で再生
+                if (alertform.ShowDialog() == DialogResult.OK)
+                {
+                   list.Items.Remove(list.SelectedItem);
+                }
+            }
+            else
+            {
+
+                infodialogmessage = "取消する項目がありません。"; //infoダイアログに表示させるメッセージを代入。
+                SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+                var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+                player.Play(); // 非同期で再生
+                infoform.ShowDialog();　//表示
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
