@@ -46,7 +46,11 @@ namespace ShimikaTill
 
         private void GoToOsiharai_Click(object sender, EventArgs e)
         {
-
+            infodialogmessage = "会計できるわけねえだろ"; //infoダイアログに表示させるメッセージを代入。
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            var alertform = new alert(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            alertform.ShowDialog();　//表示
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -77,6 +81,51 @@ namespace ShimikaTill
         private void Form1_Activated(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            infodialogmessage = "値引ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            infoform.ShowDialog();　//表示
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            infodialogmessage = "税区分ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            infoform.ShowDialog();　//表示
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            infodialogmessage = "領収書ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            infoform.ShowDialog();　//表示
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            infodialogmessage = "取消ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            infoform.ShowDialog();　//表示
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            infodialogmessage = "返品/返金ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            var infoform = new info(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            infoform.ShowDialog();　//表示
         }
     }
 }
