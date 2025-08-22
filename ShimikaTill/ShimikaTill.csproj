@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\splash1.png" />
     <None Include="Resources\splash.png" />
     <None Include="Resources\sound-alert.wav" />
   </ItemGroup>
