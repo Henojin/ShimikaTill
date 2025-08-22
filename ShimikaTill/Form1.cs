@@ -76,9 +76,13 @@ namespace ShimikaTill
             int mfy = this.Location.Y;
             var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
-            alertform.ShowDialog(); //表示
-        }
+            if (alertform.ShowDialog() == DialogResult.OK) // 表示&OKボタンが押された時の処理
+            {
+                list.Items.Clear(); //アイテムを全て削除
+                label5.Text = (list.Items.Count + "点"); //アイテム数を表示
+            }
 
+        }
         private void label2_Click(object sender, EventArgs e)
         {
              
@@ -233,7 +237,8 @@ namespace ShimikaTill
 
         private void ShimikaTillForm_MouseMove(object sender, MouseEventArgs e)
         {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left){
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
                 this.Left += e.X - mousePoint.X;
                 this.Top += e.Y - mousePoint.Y;
             }
