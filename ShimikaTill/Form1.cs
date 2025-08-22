@@ -127,7 +127,8 @@ namespace ShimikaTill
                 player.Play(); // 非同期で再生
                 if (alertform.ShowDialog() == DialogResult.OK)
                 {
-                   list.Items.Remove(list.SelectedItem);
+                    list.Items.Remove(list.SelectedItem);
+                    label5.Text = (list.Items.Count + "点");
                 }
             }
             else
@@ -169,6 +170,7 @@ namespace ShimikaTill
                     list.Items.Add(JanTextBox.Text);//アイテムついか
                     JanTextBox.Text = null; //テキストボックスを空にする
                     list.SelectedIndex = list.Items.Count - 1; //最後に入力したアイテムにフォーカスを合わせ、スクロール。
+                    label5.Text = (list.Items.Count + "点");
                 }
                 else
                 {
