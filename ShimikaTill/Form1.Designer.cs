@@ -49,6 +49,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.list = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // ClockLabel
@@ -284,6 +285,17 @@
             this.label6.TabIndex = 20;
             this.label6.Text = "0円";
             // 
+            // list
+            // 
+            this.list.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.list.FormattingEnabled = true;
+            this.list.ItemHeight = 31;
+            this.list.Location = new System.Drawing.Point(125, 116);
+            this.list.Name = "list";
+            this.list.Size = new System.Drawing.Size(667, 345);
+            this.list.TabIndex = 21;
+            this.list.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
             // ShimikaTill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 12F);
@@ -291,6 +303,7 @@
             this.BackgroundImage = global::ShimikaTill.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.list);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -345,6 +358,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox list;
     }
 }
 

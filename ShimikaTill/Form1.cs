@@ -134,5 +134,10 @@ namespace ShimikaTill
             player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
