@@ -30,18 +30,34 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(info));
             this.button1 = new System.Windows.Forms.Button();
+            this.InfoMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = global::ShimikaTill.Properties.Resources.button_grey;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button1.Location = new System.Drawing.Point(401, 147);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 35);
             this.button1.TabIndex = 0;
             this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // InfoMessage
+            // 
+            this.InfoMessage.AutoSize = true;
+            this.InfoMessage.BackColor = System.Drawing.Color.Transparent;
+            this.InfoMessage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.InfoMessage.Location = new System.Drawing.Point(140, 64);
+            this.InfoMessage.Name = "InfoMessage";
+            this.InfoMessage.Size = new System.Drawing.Size(66, 21);
+            this.InfoMessage.TabIndex = 1;
+            this.InfoMessage.Text = "label1";
             // 
             // info
             // 
@@ -50,6 +66,7 @@
             this.BackgroundImage = global::ShimikaTill.Properties.Resources.dialog;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(534, 194);
+            this.Controls.Add(this.InfoMessage);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -57,11 +74,13 @@
             this.Text = "info";
             this.Load += new System.EventHandler(this.info_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label InfoMessage;
     }
 }
