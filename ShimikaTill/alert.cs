@@ -20,12 +20,13 @@ namespace ShimikaTill
 
         private void nobutton_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.No;
         }
 
         private void yesbutton_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void alert_Load(object sender, EventArgs e)

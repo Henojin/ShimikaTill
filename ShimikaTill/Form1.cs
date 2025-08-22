@@ -13,6 +13,7 @@ namespace ShimikaTill
     public partial class Form1 : Form
     {
         static string infodialogmessage;
+        public static bool exityesorno;
         public Form1()
         {
             InitializeComponent();
@@ -41,16 +42,22 @@ namespace ShimikaTill
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            infodialogmessage = "終了しますか？\n店員以外はこの操作を行わないでください。"; //infoダイアログに表示させるメッセージを代入。
+            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
+            var alertform = new alert(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            if (alertform.ShowDialog() == DialogResult.OK) { 
+                this.Close();
+            }
         }
 
         private void GoToOsiharai_Click(object sender, EventArgs e)
         {
-            infodialogmessage = "会計できるわけねえだろ"; //infoダイアログに表示させるメッセージを代入。
+            infodialogmessage = "会計しますか？"; //infoダイアログに表示させるメッセージを代入。
             SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             var alertform = new alert(infodialogmessage);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
-            alertform.ShowDialog();　//表示
+            alertform.ShowDialog(); //表示
         }
 
         private void label2_Click(object sender, EventArgs e)
