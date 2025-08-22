@@ -36,7 +36,7 @@ namespace ShimikaTill
         {
             DateTime date = DateTime.Now;
             Hiduke.Text = date.Month + "月" + date.Day + "日";
-            ClockLabel.Text = DateTime.Now.ToShortTimeString();
+            ClockLabel.Text = (date.ToString("HH" + ":" + date.ToString("mm")));
         }
 
         private void button1_Click(object sender, EventArgs e)
