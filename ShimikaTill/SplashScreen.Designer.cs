@@ -28,17 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen));
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.progressbar1 = new MetroProgressBar.Progressbar();
             this.SuspendLayout();
             // 
-            // progressBar1
+            // timer1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(81, 271);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(472, 23);
-            this.progressBar1.TabIndex = 0;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click_1);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // progressbar1
+            // 
+            this.progressbar1.BackColor = System.Drawing.Color.Transparent;
+            this.progressbar1.Location = new System.Drawing.Point(162, 260);
+            this.progressbar1.Name = "progressbar1";
+            this.progressbar1.Size = new System.Drawing.Size(308, 13);
+            this.progressbar1.TabIndex = 0;
             // 
             // SplashScreen
             // 
@@ -46,7 +54,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::ShimikaTill.Properties.Resources.splash1;
             this.ClientSize = new System.Drawing.Size(640, 360);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.progressbar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SplashScreen";
@@ -57,7 +65,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Timer timer1;
+        private MetroProgressBar.Progressbar progressbar1;
     }
 }
