@@ -24,5 +24,11 @@ namespace ShimikaTill
             int windowy = sch / 2 - 180;
             this.Location = new Point(windowx, windowy);
         }
+
+
+        private void progressBar1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
