@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<Item>
+		<Name>ｵｵｷﾅﾀﾞﾝﾎﾞｰﾙ</Name>
+		<JANCode>004</JANCode>
+		<Price>30000</Price>
+	</Item>
+	<Item>
+		<Name>ﾄﾏﾄﾂﾒｱﾜｾ5ｺ</Name>
+		<JANCode>228</JANCode>
+		<Price>250</Price>
+	</Item>
+	<Item>
+		<Name>ﾏﾂﾀｹﾊﾟｯｸ</Name>
+		<JANCode>028</JANCode>
+		<Price>450</Price>
+	</Item>
+</root>

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Media;
+using System.IO;
+using System.Xml.Linq;
 
 namespace ShimikaTill
 {
@@ -15,16 +17,17 @@ namespace ShimikaTill
     {
         static string infodialogmessage;
         private Point mousePoint;
+        static int SumPrice;
         public ShimikaTillForm()
         {
             InitializeComponent();
         }
 
-     
 
 
 
-      
+
+        string configFilePath;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -38,6 +41,9 @@ namespace ShimikaTill
             ClockTimer.Interval = 1000; //1秒に1回実行
             ClockTimer.Start(); //タイマーを開始
             JanTextBox.Text = "JANを入力";
+            string FullAppPath = Application.ExecutablePath;
+            string dirPath = Path.GetDirectoryName(FullAppPath);
+            configFilePath = Path.Combine(dirPath, "Items.xml");
         }
 
         private void ClockTimer_Tick(object sender, EventArgs e)　//タイマーによる時刻＆日付表示
@@ -79,7 +85,9 @@ namespace ShimikaTill
             if (alertform.ShowDialog() == DialogResult.OK) // 表示&OKボタンが押された時の処理
             {
                 list.Items.Clear(); //アイテムを全て削除
-                label5.Text = (list.Items.Count + "点"); //アイテム数を表示
+                SumPrice = 0;
+                label5.Text = (list.Items.Count + "点");//アイテム数を表示
+                label4.Text = (SumPrice + "円"); //小計表示
             }
 
         }
@@ -152,17 +160,36 @@ namespace ShimikaTill
         {
            if(list.SelectedIndex != -1)
             {
-                infodialogmessage = "選択項目を取り消しますか？"; //infoダイアログに表示させるメッセージを代入。
+                //infodialogmessage = "選択項目を取り消しますか？"; //infoダイアログに表示させるメッセージを代入。
                 SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
                 int mfx = this.Location.X;
                 int mfy = this.Location.Y;
-                var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+                var inputform = new Inputdialo(mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
                 player.Play(); // 非同期で再生
-                if (alertform.ShowDialog() == DialogResult.OK)
-                {
-                    list.Items.Remove(list.SelectedItem);
-                    label5.Text = (list.Items.Count + "点");
+                if(inputform.ShowDialog() == DialogResult.OK) { 
+                    if(inputform.TextBox1Str == "") {
+                        player.Play();
+                    } else{
+
+                        XDocument doc = XDocument.Load(configFilePath);
+                        IEnumerable<XElement> items = doc.Descendants("Item");
+                        foreach (XElement item in items)
+                        {
+                            string JAN = item.Element("JANCode").Value;
+                            if (JAN == inputform.TextBox1Str)
+                            {
+                                string Iname = item.Element("Name").Value;
+                                int PPrice = int.Parse(item.Element("Price").Value);
+                                list.Items.Add("ﾄﾘｹｼ:" + Iname + "    @1: -" + PPrice + "円");
+                                SumPrice = SumPrice - PPrice;
+                            }
+
+                        }
+                        label4.Text = (SumPrice + "円"); //小計
+                        label5.Text = (list.Items.Count + "点");
+                    }
                 }
+
             }
             else
             {
@@ -200,14 +227,29 @@ namespace ShimikaTill
 
         private void JanTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter) //ここでスキャン処理
             {
                 if (JanTextBox.Text != "")
                 {
-                    list.Items.Add(JanTextBox.Text);//アイテムついか
+                    XDocument doc = XDocument.Load(configFilePath);
+                    IEnumerable<XElement> items = doc.Descendants("Item");
+                    foreach (XElement item in items)
+                    {
+                        string JAN = item.Element("JANCode").Value;
+                        if (JAN == JanTextBox.Text)
+                        {
+                            string Iname = item.Element("Name").Value;
+                            int PPrice = int.Parse(item.Element("Price").Value);
+                            list.Items.Add(""+ Iname +"    @1:" + PPrice + "円");
+                            SumPrice = SumPrice + PPrice;
+                        }
+
+                    }
+                    label4.Text = ( SumPrice + "円"); //小計
                     JanTextBox.Text = null; //テキストボックスを空にする
                     list.SelectedIndex = list.Items.Count - 1; //最後に入力したアイテムにフォーカスを合わせ、スクロール。
                     label5.Text = (list.Items.Count + "点");
+            
                 }
                 else
                 {
