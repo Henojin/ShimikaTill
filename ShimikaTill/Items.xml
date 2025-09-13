@@ -4,15 +4,18 @@
 		<Name>ｵｵｷﾅﾀﾞﾝﾎﾞｰﾙ</Name>
 		<JANCode>004</JANCode>
 		<Price>30000</Price>
+		<TAX>1.10</TAX>
 	</Item>
 	<Item>
 		<Name>ﾄﾏﾄﾂﾒｱﾜｾ5ｺ</Name>
 		<JANCode>228</JANCode>
 		<Price>250</Price>
+		<TAX>1.08</TAX>
 	</Item>
 	<Item>
 		<Name>ﾏﾂﾀｹﾊﾟｯｸ</Name>
 		<JANCode>028</JANCode>
 		<Price>450</Price>
+		<TAX>1.08</TAX>
 	</Item>
 </root>

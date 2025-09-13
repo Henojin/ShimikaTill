@@ -18,6 +18,7 @@ namespace ShimikaTill
         static string infodialogmessage;
         private Point mousePoint;
         static int SumPrice;
+        static int PlusTaxPrice;
         public ShimikaTillForm()
         {
             InitializeComponent();
@@ -86,8 +87,10 @@ namespace ShimikaTill
             {
                 list.Items.Clear(); //アイテムを全て削除
                 SumPrice = 0;
+                PlusTaxPrice = 0;
                 label5.Text = (list.Items.Count + "点");//アイテム数を表示
                 label4.Text = (SumPrice + "円"); //小計表示
+                label6.Text = (PlusTaxPrice + "円");
             }
 
         }
@@ -181,12 +184,17 @@ namespace ShimikaTill
                                 string Iname = item.Element("Name").Value;
                                 int PPrice = int.Parse(item.Element("Price").Value);
                                 list.Items.Add("ﾄﾘｹｼ:" + Iname + "    @1: -" + PPrice + "円");
+                                //Tax
+                                double PTax = double.Parse(item.Element("TAX").Value);
                                 SumPrice = SumPrice - PPrice;
+                                double IncTax = PPrice * PTax;
+                                PlusTaxPrice = PlusTaxPrice - (int)(IncTax);
                             }
 
                         }
                         label4.Text = (SumPrice + "円"); //小計
                         label5.Text = (list.Items.Count + "点");
+                        label6.Text = (PlusTaxPrice + "円");//合計
                     }
                 }
 
@@ -241,11 +249,17 @@ namespace ShimikaTill
                             string Iname = item.Element("Name").Value;
                             int PPrice = int.Parse(item.Element("Price").Value);
                             list.Items.Add(""+ Iname +"    @1:" + PPrice + "円");
-                            SumPrice = SumPrice + PPrice;
+                                    //Tax
+                                    double PTax = double.Parse(item.Element("TAX").Value);
+                                    SumPrice = SumPrice + PPrice;
+                                    double IncTax = PPrice * PTax;
+                                    PlusTaxPrice = PlusTaxPrice +  (int)(IncTax);
                         }
 
                     }
+                    label6.Text = (PlusTaxPrice + "円");//合計
                     label4.Text = ( SumPrice + "円"); //小計
+                    
                     JanTextBox.Text = null; //テキストボックスを空にする
                     list.SelectedIndex = list.Items.Count - 1; //最後に入力したアイテムにフォーカスを合わせ、スクロール。
                     label5.Text = (list.Items.Count + "点");
