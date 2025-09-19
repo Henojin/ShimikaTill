@@ -19,7 +19,7 @@ namespace ShimikaTill
         private Point mousePoint;
         static int SumPrice;
         static int PlusTaxPrice;
-        static bool is18kin = true; //18禁フラグ。仮実装。商品リストに入れる？
+        static bool is18kin = false; //18禁フラグ。仮実装。商品リストに入れる？
         static bool is18kakunin = false;//年齢確認後、会計終了後まで連続で確認が入らないようにする
         public ShimikaTillForm()
         {
@@ -77,21 +77,34 @@ namespace ShimikaTill
         }
 
         private void GoToOsiharai_Click(object sender, EventArgs e)
-        {
-            infodialogmessage = "会計しますか？"; //infoダイアログに表示させるメッセージを代入。
-            int mfx = this.Location.X;
-            int mfy = this.Location.Y;
-            var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
-            player.Play(); // 非同期で再生
-            if (alertform.ShowDialog() == DialogResult.OK) // 表示&OKボタンが押された時の処理
+        {if (list.Items.Count == 0)
             {
-                list.Items.Clear(); //アイテムを全て削除
-                SumPrice = 0;
-                PlusTaxPrice = 0;
-                label5.Text = (list.Items.Count + "点");//アイテム数を表示
-                label4.Text = (SumPrice + "円"); //小計表示
-                label6.Text = (PlusTaxPrice + "円");
-                is18kakunin = false; //確認済みフラグをリセット
+                infodialogmessage = "操作が違います。\n操作手順を確認してください。"; //infoダイアログに表示させるメッセージを代入。
+                int mfx = this.Location.X;
+                int mfy = this.Location.Y;
+                var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+                player.Play(); // 非同期で再生
+                infoform.ShowDialog();　//表示
+                return;
+            }
+            else
+            {
+                infodialogmessage = "会計しますか？"; //infoダイアログに表示させるメッセージを代入。
+                int mfx = this.Location.X;
+                int mfy = this.Location.Y;
+                var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+                player.Play(); // 非同期で再生
+                if (alertform.ShowDialog() == DialogResult.OK) // 表示&OKボタンが押された時の処理
+                {
+                    list.Items.Clear(); //アイテムを全て削除
+                    SumPrice = 0;
+                    PlusTaxPrice = 0;
+                    label5.Text = (list.Items.Count + "点");//アイテム数を表示
+                    label4.Text = (SumPrice + "円"); //小計表示
+                    label6.Text = (PlusTaxPrice + "円");
+                    is18kakunin = false; //確認済みフラグをリセット
+
+                }
             }
 
         }
@@ -241,9 +254,16 @@ namespace ShimikaTill
                         if (JAN == JanTextBox.Text)
                         {
                             string Iname = item.Element("Name").Value;
+
+
+                            if (item.Element("check").Value == "true")
+                            {
+                                is18kin = true; //18禁フラグを立てる
+                            }
+
                             int PPrice = int.Parse(item.Element("Price").Value);
 
-                            if (is18kin == true && is18kakunin == false)
+                            if (is18kin == true && is18kakunin == false)//年齢確認
                             {
                                 infodialogmessage = $"{Iname}\nこの商品は販売確認対象商品です。\n登録を続行しますか？";
 
@@ -290,6 +310,11 @@ namespace ShimikaTill
                 {
                     player.Play();
                 }
+            }
+
+            else if(e.KeyCode == Keys.Space)
+            {
+                GoToOsiharai_Click(sender, e);
             }
         }
 
