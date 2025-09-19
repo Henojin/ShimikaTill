@@ -18,4 +18,10 @@
 		<Price>450</Price>
 		<TAX>1.08</TAX>
 	</Item>
+	<Item>
+		<Name>恋がさくころ桜どき</Name>
+		<JANCode>4580122230227</JANCode>
+		<Price>1300</Price>
+		<TAX>1.08</TAX>
+	</Item>
 </root>

@@ -19,12 +19,14 @@ namespace ShimikaTill
         private Point mousePoint;
         static int SumPrice;
         static int PlusTaxPrice;
+        static bool is18kin = true; //18禁フラグ。仮実装。商品リストに入れる？
+        static bool is18kakunin = false;//年齢確認後、会計終了後まで連続で確認が入らないようにする
         public ShimikaTillForm()
         {
             InitializeComponent();
         }
 
-
+        SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);//操作音
 
 
 
@@ -65,7 +67,6 @@ namespace ShimikaTill
         private void button1_Click(object sender, EventArgs e)
         {
             infodialogmessage = "終了しますか？\n店員以外はこの操作を行わないでください。"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var alertform = new alert(infodialogmessage,mfx,mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -78,7 +79,6 @@ namespace ShimikaTill
         private void GoToOsiharai_Click(object sender, EventArgs e)
         {
             infodialogmessage = "会計しますか？"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -91,6 +91,7 @@ namespace ShimikaTill
                 label5.Text = (list.Items.Count + "点");//アイテム数を表示
                 label4.Text = (SumPrice + "円"); //小計表示
                 label6.Text = (PlusTaxPrice + "円");
+                is18kakunin = false; //確認済みフラグをリセット
             }
 
         }
@@ -112,7 +113,6 @@ namespace ShimikaTill
         private void button2_Click(object sender, EventArgs e)
         {
             infodialogmessage = "業務選択ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var infoform = new info(infodialogmessage,mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -129,7 +129,6 @@ namespace ShimikaTill
         private void button3_Click(object sender, EventArgs e)
         {
             infodialogmessage = "値引ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -140,7 +139,6 @@ namespace ShimikaTill
         private void button4_Click(object sender, EventArgs e)
         {
             infodialogmessage = "税区分ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -151,7 +149,6 @@ namespace ShimikaTill
         private void button5_Click(object sender, EventArgs e)
         {
             infodialogmessage = "領収書ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -164,7 +161,6 @@ namespace ShimikaTill
            if(list.SelectedIndex != -1)
             {
                 //infodialogmessage = "選択項目を取り消しますか？"; //infoダイアログに表示させるメッセージを代入。
-                SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
                 int mfx = this.Location.X;
                 int mfy = this.Location.Y;
                 var inputform = new Inputdialo(mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -203,7 +199,6 @@ namespace ShimikaTill
             {
 
                 infodialogmessage = "取消する項目がありません。"; //infoダイアログに表示させるメッセージを代入。
-                SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
                 int mfx = this.Location.X;
                 int mfy = this.Location.Y;
                 var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -215,7 +210,6 @@ namespace ShimikaTill
         private void button7_Click(object sender, EventArgs e)
         {
             infodialogmessage = "返品/返金ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
-            SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -248,12 +242,39 @@ namespace ShimikaTill
                         {
                             string Iname = item.Element("Name").Value;
                             int PPrice = int.Parse(item.Element("Price").Value);
-                            list.Items.Add(""+ Iname +"    @1:" + PPrice + "円");
+
+                            if (is18kin == true && is18kakunin == false)
+                            {
+                                infodialogmessage = $"{Iname}\nこの商品は販売確認対象商品です。\n登録を続行しますか？";
+
+                                int mfx = this.Location.X;
+                                int mfy = this.Location.Y;
+                                var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+                                player.Play(); // 非同期で再生
+                                if (alertform.ShowDialog() == DialogResult.OK) // 表示&OKボタンが押された時の処理
+                                {
+                                    list.Items.Add(""    + Iname + "    @1:" + PPrice + "円");
                                     //Tax
                                     double PTax = double.Parse(item.Element("TAX").Value);
                                     SumPrice = SumPrice + PPrice;
                                     double IncTax = PPrice * PTax;
-                                    PlusTaxPrice = PlusTaxPrice +  (int)(IncTax);
+                                    PlusTaxPrice = PlusTaxPrice + (int)(IncTax);
+                                    is18kakunin = true; //確認済みにする
+                                    
+
+                                }
+                            is18kin = false; //年齢確認フラグをリセット
+                            }
+                            else
+                            {
+                                list.Items.Add("" + Iname + "    @1:" + PPrice + "円");
+                                //Tax
+                                double PTax = double.Parse(item.Element("TAX").Value);
+                                SumPrice = SumPrice + PPrice;
+                                double IncTax = PPrice * PTax;
+                                PlusTaxPrice = PlusTaxPrice + (int)(IncTax);
+
+                            }
                         }
 
                     }
@@ -267,7 +288,6 @@ namespace ShimikaTill
                 }
                 else
                 {
-                    SoundPlayer player = new SoundPlayer(Properties.Resources.sound_alert);
                     player.Play();
                 }
             }
