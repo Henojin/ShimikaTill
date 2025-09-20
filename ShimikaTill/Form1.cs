@@ -36,7 +36,7 @@ namespace ShimikaTill
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
-            player.Play(); // 非同期で再生
+                                                                 // player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
         }
 

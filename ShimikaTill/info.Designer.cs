@@ -73,6 +73,7 @@
             this.Name = "info";
             this.Text = "info";
             this.Load += new System.EventHandler(this.info_Load);
+            this.Shown += new System.EventHandler(this.info_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
