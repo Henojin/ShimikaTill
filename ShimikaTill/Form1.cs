@@ -18,6 +18,7 @@ namespace ShimikaTill
         static int PlusTaxPrice;
         static bool is18kin = false; //18禁フラグ。仮実装。商品リストに入れる？
         static bool is18kakunin = false;//年齢確認後、会計終了後まで連続で確認が入らないようにする
+        static string pricestring;//test
         public ShimikaTillForm()
         {
             InitializeComponent();
@@ -28,6 +29,17 @@ namespace ShimikaTill
 
 
         string configFilePath;
+
+        void errorscr()
+        {
+            infodialogmessage = "操作が違います。\n操作手順を確認してください。"; //infoダイアログに表示させるメッセージを代入。
+            int mfx = this.Location.X;
+            int mfy = this.Location.Y;
+            var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+            player.Play(); // 非同期で再生
+            infoform.ShowDialog();　//表示
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -102,11 +114,13 @@ namespace ShimikaTill
                     label4.Text = (SumPrice + "円"); //小計表示
                     label6.Text = (PlusTaxPrice + "円");
                     is18kakunin = false; //確認済みフラグをリセット
+                    JanTextBox.Text = "JANを入力";
 
                 }
             }
 
         }
+        
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -148,14 +162,49 @@ namespace ShimikaTill
             infoform.ShowDialog();　//表示
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)//税区分
         {
-            infodialogmessage = "税区分ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
-            int mfx = this.Location.X;
-            int mfy = this.Location.Y;
-            var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
-            player.Play(); // 非同期で再生
-            infoform.ShowDialog();　//表示
+            
+            if (JanTextBox.Text != "JANを入力")
+            {
+                pricestring = JanTextBox.Text;
+                string Iname = "商 品";
+                int PPrice;
+                int.TryParse(pricestring, out PPrice);
+                //int PPrice = int.Parse(pricestring);
+                //  int PPrice = Convert.ToInt32(JanTextBox.Text);
+
+
+                if (PPrice == 0)
+
+                {
+                    errorscr();
+                    return;
+                }
+                else
+                {
+                    list.Items.Add("" + Iname + "    @1:" + PPrice + "円");
+                    //Tax
+                    double PTax = 1.10;
+                    SumPrice = SumPrice + PPrice;
+                    double IncTax = PPrice * PTax;
+                    PlusTaxPrice = PlusTaxPrice + (int)(IncTax);
+
+
+                    label6.Text = (PlusTaxPrice + "円");//合計
+                    label4.Text = (SumPrice + "円"); //小計
+
+                    JanTextBox.Text = null; //テキストボックスを空にする
+                    list.SelectedIndex = list.Items.Count - 1; //最後に入力したアイテムにフォーカスを合わせ、スクロール。
+                    label5.Text = (list.Items.Count + "点");
+
+                }
+            }
+            else
+            {
+                errorscr();
+            }
+            JanTextBox.Text = null; //テキストボックスを空にする
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -365,6 +414,12 @@ namespace ShimikaTill
                         SendKeys.Send("{END}"); 
                     }
                     break;
+
+                    case Keys.Divide:
+                        button4_Click(sender, e);
+                    
+                    break;
+
                 default:
                     break;
                    
@@ -378,7 +433,7 @@ namespace ShimikaTill
 
         private void JanTextBox_Leave(object sender, EventArgs e)
         {
-            JanTextBox.Text = "JANを入力";
+           // JanTextBox.Text = "JANを入力";
         }
 
         private void JanTextBox_Enter(object sender, EventArgs e)
