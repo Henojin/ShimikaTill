@@ -54,7 +54,7 @@ namespace ShimikaTill
 
 
 
-            if (InfoMessage.Text == "操作が違います。\n操作手順を確認してください。")
+            if (InfoMessage.Text == "操作が違います。\n操作手順を確認してください。")//beep
             {
 
                 Task btask = Task.Factory.StartNew(() =>
