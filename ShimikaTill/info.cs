@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ShimikaTill
@@ -44,8 +47,32 @@ namespace ShimikaTill
                 
                 this.Location = new Point(mfx + 120, mfy+ 200);
             }
-                
-            InfoMessage.Text = dialogmess;　//表示
+
+            var tokenSource = new CancellationTokenSource();
+            var cancelToken = tokenSource.Token;
+            InfoMessage.Text = dialogmess; //表示
+
+
+
+            if (InfoMessage.Text == "操作が違います。\n操作手順を確認してください。")
+            {
+
+                Task btask = Task.Factory.StartNew(() =>
+                {
+                    Console.Beep(1711, 1000);
+
+                });
+
+            }
+
+
+            
+            
+        }
+
+        private  void info_Shown(object sender, EventArgs e)
+        {
+            
         }
     }
 }
