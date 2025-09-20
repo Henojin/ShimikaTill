@@ -35,6 +35,7 @@ namespace ShimikaTill
             int scw = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             ShimikaTillForm mainform = new ShimikaTillForm();
             Point mfpoint = mainform.Location;
+            
 
             if (scw == 800 && sch == 600)
             {
@@ -45,6 +46,8 @@ namespace ShimikaTill
 
                 this.Location = new Point(mfx + 120, mfy + 200);
             }
+
+            textBox1.Focus();
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)

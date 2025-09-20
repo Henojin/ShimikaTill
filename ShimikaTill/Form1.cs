@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Media;
 using System.IO;
+using System.Media;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace ShimikaTill
 {
-    
+
     public partial class ShimikaTillForm : Form
     {
         static string infodialogmessage;
@@ -36,10 +33,10 @@ namespace ShimikaTill
         {
             int sch = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
             int scw = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-           if (scw == 800 && sch == 600)
+            if (scw == 800 && sch == 600)
             {
                 this.Location = new Point(0, 0);
-             
+
             }
             ClockTimer.Interval = 1000; //1秒に1回実行
             ClockTimer.Start(); //タイマーを開始
@@ -69,15 +66,17 @@ namespace ShimikaTill
             infodialogmessage = "終了しますか？\n店員以外はこの操作を行わないでください。"; //infoダイアログに表示させるメッセージを代入。
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
-            var alertform = new alert(infodialogmessage,mfx,mfy);//infoダイアログに情報を渡すように引数を指定。
+            var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
-            if (alertform.ShowDialog() == DialogResult.OK) { 
+            if (alertform.ShowDialog() == DialogResult.OK)
+            {
                 this.Close();
             }
         }
 
         private void GoToOsiharai_Click(object sender, EventArgs e)
-        {if (list.Items.Count == 0)
+        {
+            if (list.Items.Count == 0)
             {
                 infodialogmessage = "操作が違います。\n操作手順を確認してください。"; //infoダイアログに表示させるメッセージを代入。
                 int mfx = this.Location.X;
@@ -110,7 +109,7 @@ namespace ShimikaTill
         }
         private void label2_Click(object sender, EventArgs e)
         {
-             
+
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -128,7 +127,7 @@ namespace ShimikaTill
             infodialogmessage = "業務選択ダイアログです。"; //infoダイアログに表示させるメッセージを代入。
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
-            var infoform = new info(infodialogmessage,mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+            var infoform = new info(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
             player.Play(); // 非同期で再生
             infoform.ShowDialog();　//表示
 
@@ -171,17 +170,21 @@ namespace ShimikaTill
 
         private void button6_Click(object sender, EventArgs e)
         {
-           if(list.SelectedIndex != -1)
+            if (list.SelectedIndex != -1)
             {
                 //infodialogmessage = "選択項目を取り消しますか？"; //infoダイアログに表示させるメッセージを代入。
                 int mfx = this.Location.X;
                 int mfy = this.Location.Y;
                 var inputform = new Inputdialo(mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
                 player.Play(); // 非同期で再生
-                if(inputform.ShowDialog() == DialogResult.OK) { 
-                    if(inputform.TextBox1Str == "") {
+                if (inputform.ShowDialog() == DialogResult.OK)
+                {
+                    if (inputform.TextBox1Str == "")
+                    {
                         player.Play();
-                    } else{
+                    }
+                    else
+                    {
 
                         XDocument doc = XDocument.Load(configFilePath);
                         IEnumerable<XElement> items = doc.Descendants("Item");
@@ -242,81 +245,136 @@ namespace ShimikaTill
 
         private void JanTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) //ここでスキャン処理
+
+            switch (e.KeyCode)
             {
-                if (JanTextBox.Text != "")
-                {
-                    XDocument doc = XDocument.Load(configFilePath);
-                    IEnumerable<XElement> items = doc.Descendants("Item");
-                    foreach (XElement item in items)
+                case Keys.Enter://ここでスキャン処理(switch文に変更)
+                    if (JanTextBox.Text != "")
                     {
-                        string JAN = item.Element("JANCode").Value;
-                        if (JAN == JanTextBox.Text)
+                        XDocument doc = XDocument.Load(configFilePath);
+                        IEnumerable<XElement> items = doc.Descendants("Item");
+                        foreach (XElement item in items)
                         {
-                            string Iname = item.Element("Name").Value;
-
-
-                            if (item.Element("check").Value == "true")
+                            string JAN = item.Element("JANCode").Value;
+                            if (JAN == JanTextBox.Text)
                             {
-                                is18kin = true; //18禁フラグを立てる
-                            }
+                                string Iname = item.Element("Name").Value;
 
-                            int PPrice = int.Parse(item.Element("Price").Value);
 
-                            if (is18kin == true && is18kakunin == false)//年齢確認
-                            {
-                                infodialogmessage = $"{Iname}\nこの商品は販売確認対象商品です。\n登録を続行しますか？";
-
-                                int mfx = this.Location.X;
-                                int mfy = this.Location.Y;
-                                var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
-                                player.Play(); // 非同期で再生
-                                if (alertform.ShowDialog() == DialogResult.OK) // 表示&OKボタンが押された時の処理
+                                if (item.Element("check").Value == "true")
                                 {
-                                    list.Items.Add(""    + Iname + "    @1:" + PPrice + "円");
+                                    is18kin = true; //18禁フラグを立てる
+                                }
+
+                                int PPrice = int.Parse(item.Element("Price").Value);
+
+                                if (is18kin == true && is18kakunin == false)//年齢確認
+                                {
+                                    infodialogmessage = $"{Iname}\nこの商品は販売確認対象商品です。\n登録を続行しますか？";
+
+                                    int mfx = this.Location.X;
+                                    int mfy = this.Location.Y;
+                                    var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+                                    player.Play(); // 非同期で再生
+                                    if (alertform.ShowDialog() == DialogResult.OK) // 表示&OKボタンが押された時の処理
+                                    {
+                                        list.Items.Add("" + Iname + "    @1:" + PPrice + "円");
+                                        //Tax
+                                        double PTax = double.Parse(item.Element("TAX").Value);
+                                        SumPrice = SumPrice + PPrice;
+                                        double IncTax = PPrice * PTax;
+                                        PlusTaxPrice = PlusTaxPrice + (int)(IncTax);
+                                        is18kakunin = true; //確認済みにする
+
+
+                                    }
+                                    is18kin = false; //年齢確認フラグをリセット
+                                }
+                                else
+                                {
+                                    list.Items.Add("" + Iname + "    @1:" + PPrice + "円");
                                     //Tax
                                     double PTax = double.Parse(item.Element("TAX").Value);
                                     SumPrice = SumPrice + PPrice;
                                     double IncTax = PPrice * PTax;
                                     PlusTaxPrice = PlusTaxPrice + (int)(IncTax);
-                                    is18kakunin = true; //確認済みにする
-                                    
 
                                 }
-                            is18kin = false; //年齢確認フラグをリセット
                             }
-                            else
-                            {
-                                list.Items.Add("" + Iname + "    @1:" + PPrice + "円");
-                                //Tax
-                                double PTax = double.Parse(item.Element("TAX").Value);
-                                SumPrice = SumPrice + PPrice;
-                                double IncTax = PPrice * PTax;
-                                PlusTaxPrice = PlusTaxPrice + (int)(IncTax);
 
-                            }
                         }
+                        label6.Text = (PlusTaxPrice + "円");//合計
+                        label4.Text = (SumPrice + "円"); //小計
+
+                        JanTextBox.Text = null; //テキストボックスを空にする
+                        list.SelectedIndex = list.Items.Count - 1; //最後に入力したアイテムにフォーカスを合わせ、スクロール。
+                        label5.Text = (list.Items.Count + "点");
 
                     }
-                    label6.Text = (PlusTaxPrice + "円");//合計
-                    label4.Text = ( SumPrice + "円"); //小計
-                    
-                    JanTextBox.Text = null; //テキストボックスを空にする
-                    list.SelectedIndex = list.Items.Count - 1; //最後に入力したアイテムにフォーカスを合わせ、スクロール。
-                    label5.Text = (list.Items.Count + "点");
-            
-                }
-                else
-                {
-                    player.Play();
-                }
-            }
+                    else
+                    {
+                        player.Play();
+                    }
+                    break;
 
-            else if(e.KeyCode == Keys.Space)
-            {
-                GoToOsiharai_Click(sender, e);
+                case Keys.Space:
+                    GoToOsiharai_Click(sender, e);
+                    JanTextBox.Text = null; //テキストボックスを空にする
+                    break;
+                case Keys.U:
+                    button3_Click(sender, e);
+                    JanTextBox.Text = null; //テキストボックスを空にする
+                    break;
+                case Keys.A:
+                    button6_Click(sender, e);
+                    JanTextBox.Text = null; //テキストボックスを空にする
+                    break;
+                case Keys.Escape:
+                    JanTextBox.Text = null;
+                    break;
+                case Keys.T:
+                    button5_Click(sender, e);
+                    JanTextBox.Text = null; //テキストボックスを空にする
+                    break;
+                case Keys.D2:
+                    if (e.KeyCode == Keys.D2 && e.Shift)
+                    { 
+                        button2_Click(sender, e);
+                        JanTextBox.Text = null; //テキストボックスを空にする
+                    }
+                    
+                    break;
+                case Keys.C:
+                    button1_Click(sender, e);
+                    JanTextBox.Text = null; //テキストボックスを空にする
+                    break;
+                case Keys.D7:
+                   
+                    if (e.KeyCode == Keys.D7 && e.Shift)
+                    {
+                        button3_Click(sender, e);
+                        JanTextBox.Text = null; //テキストボックスを空にする
+                    }
+                    
+                    break;
+                case Keys.Oemcomma:
+                    if (e.KeyCode == Keys.Oemcomma && e.Shift)
+                    {
+                        SendKeys.Send("{BS}"); // バックスペースを送信しピリオドを削除
+                        JanTextBox.Text += "00"; 
+                        SendKeys.Send("{END}"); 
+                    }
+                    break;
+                default:
+                    break;
+                   
+
+
             }
+            
+
         }
+
 
         private void JanTextBox_Leave(object sender, EventArgs e)
         {
