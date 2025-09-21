@@ -294,7 +294,6 @@ namespace ShimikaTill
 
         private void JanTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-
             switch (e.KeyCode)
             {
                 case Keys.Enter://ここでスキャン処理(switch文に変更)
@@ -421,6 +420,7 @@ namespace ShimikaTill
                     break;
 
                 default:
+                    
                     break;
                    
 
@@ -455,6 +455,14 @@ namespace ShimikaTill
             {
                 this.Left += e.X - mousePoint.X;
                 this.Top += e.Y - mousePoint.Y;
+            }
+        }
+
+        private void JanTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar < '0'|| '9' < e.KeyChar)
+            {
+                e.Handled = true; // 数字以外の入力を無効にする
             }
         }
     }

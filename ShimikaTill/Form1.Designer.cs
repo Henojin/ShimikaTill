@@ -160,6 +160,7 @@
             this.JanTextBox.TextChanged += new System.EventHandler(this.JanTextBox_TextChanged);
             this.JanTextBox.Enter += new System.EventHandler(this.JanTextBox_Enter);
             this.JanTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.JanTextBox_KeyDown);
+            this.JanTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.JanTextBox_KeyPress);
             this.JanTextBox.Leave += new System.EventHandler(this.JanTextBox_Leave);
             // 
             // Hiduke
@@ -291,7 +292,7 @@
             // 
             // list
             // 
-            this.list.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.list.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list.FormattingEnabled = true;
             this.list.ItemHeight = 31;
             this.list.Location = new System.Drawing.Point(124, 109);
