@@ -25,6 +25,10 @@ namespace ShimikaTill
 
         private void nobutton_Click(object sender, EventArgs e)
         {
+            /* 没
+            KeyEventArgs keyEventArgs = new KeyEventArgs(Keys.Enter);
+            nobutton_KeyDown(sender, keyEventArgs);
+            */
             this.DialogResult = DialogResult.No;
         }
 
@@ -46,6 +50,24 @@ namespace ShimikaTill
                 this.Location = new Point(mfx + 120, mfy + 200);
             }
             AlertMessage.Text = dialogmess;　//表示
+        }
+
+        private void nobutton_KeyDown(object sender, KeyEventArgs e)
+        {
+            /*没予定
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                this.DialogResult = DialogResult.Yes;
+                this.Close();
+            }
+            */
+        }
+
+        private void alert_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+
         }
     }
 }

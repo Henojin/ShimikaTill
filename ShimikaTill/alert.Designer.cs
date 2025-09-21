@@ -48,6 +48,7 @@
             this.nobutton.Text = "いいえ";
             this.nobutton.UseVisualStyleBackColor = false;
             this.nobutton.Click += new System.EventHandler(this.nobutton_Click);
+            this.nobutton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nobutton_KeyDown);
             // 
             // yesbutton
             // 
@@ -90,6 +91,7 @@
             this.Name = "alert";
             this.Text = "alert";
             this.Load += new System.EventHandler(this.alert_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.alert_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

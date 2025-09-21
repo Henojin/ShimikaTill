@@ -411,6 +411,7 @@ namespace ShimikaTill
                         SendKeys.Send("{BS}"); // バックスペースを送信しピリオドを削除
                         JanTextBox.Text += "00"; 
                         SendKeys.Send("{END}"); 
+                        SendKeys.Send("{RIGHT}");
                     }
                     break;
 
