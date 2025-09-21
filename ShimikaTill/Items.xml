@@ -28,4 +28,26 @@
 		<TAX>1.10</TAX>
 		<check>true</check>
 	</Item>
+	<Item>
+		<Name>三ツ矢 特濃オレンジ 500ml</Name>
+		<JANCode>4514603461114</JANCode>
+		<Price>180</Price>
+		<TAX>1.10</TAX>
+		<check>false</check>
+	</Item>
+	<Item>
+		<Name>ｷﾘﾝ ﾜﾝﾃﾞｲ微糖 600ml</Name>
+		<JANCode>4909411090517</JANCode>
+		<Price>188</Price>
+		<TAX>1.10</TAX>
+		<check>false</check>
+	</Item>
+	<Item>
+		<Name>Windows 11 Home</Name>
+		<JANCode>4549576190358</JANCode>
+		<Price>16500</Price>
+		<TAX>1.10</TAX>
+		<check>true</check>
+	</Item>
+	
 </root>
