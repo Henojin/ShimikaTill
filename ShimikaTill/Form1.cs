@@ -75,7 +75,7 @@ namespace ShimikaTill
 
         private void button1_Click(object sender, EventArgs e)
         {
-            infodialogmessage = "終了しますか？\n店員以外はこの操作を行わないでください。"; //infoダイアログに表示させるメッセージを代入。
+            infodialogmessage = "終了しますか？\n従業員以外はこの操作を行わないでください"; //infoダイアログに表示させるメッセージを代入。
             int mfx = this.Location.X;
             int mfy = this.Location.Y;
             var alertform = new alert(infodialogmessage, mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
@@ -221,10 +221,11 @@ namespace ShimikaTill
         {
             if (list.SelectedIndex != -1)
             {
-                //infodialogmessage = "選択項目を取り消しますか？"; //infoダイアログに表示させるメッセージを代入。
                 int mfx = this.Location.X;
                 int mfy = this.Location.Y;
-                var inputform = new Inputdialo(mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
+                //2026/1/06 msg でインフォの文字を変えられるように戻した。
+                string msg = "取り消す商品のJANコード又は、\n-の後に単価を入力してください。";
+                var inputform = new Inputdialo(msg,mfx, mfy);//infoダイアログに情報を渡すように引数を指定。
                 player.Play(); // 非同期で再生
                 if (inputform.ShowDialog() == DialogResult.OK)
                 {
@@ -234,7 +235,17 @@ namespace ShimikaTill
                     }
                     else
                     {
-
+                        //2026/1/06更新 金額入力による取り消し処理
+                        if (inputform.TextBox1Str[0] == '-')
+                        {
+                            string priceStr = inputform.TextBox1Str.Substring(1);
+                            int price = int.Parse(priceStr);
+                            list.Items.Add("ﾄﾘｹｼ:金額: -" + price + "円");
+                            SumPrice = SumPrice - price;
+                            double inctax2 = price * 1.10; //税込みとりあえず10％で。
+                            PlusTaxPrice = PlusTaxPrice - (int)inctax2 ;
+                        }
+                        //2026/1/06ここまで
                         XDocument doc = XDocument.Load(configFilePath);
                         IEnumerable<XElement> items = doc.Descendants("Item");
                         foreach (XElement item in items)

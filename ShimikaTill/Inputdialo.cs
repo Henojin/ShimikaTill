@@ -13,12 +13,15 @@ namespace ShimikaTill
     {
         private int mfx;
         private int mfy;
+        private string msg;
+
         public string TextBox1Str { get; private set; } = "";
-        public Inputdialo(int mfx, int mfy)
+        public Inputdialo(string msg ,int mfx, int mfy)
         {
             InitializeComponent();
             this.mfx = mfx;
             this.mfy = mfy;
+            this.msg = msg;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -47,6 +50,7 @@ namespace ShimikaTill
                 this.Location = new Point(mfx + 120, mfy + 200);
             }
 
+            label1.Text = msg;
             textBox1.Focus();
         }
 
