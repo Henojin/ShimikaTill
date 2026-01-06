@@ -7,7 +7,7 @@
 .NET Freamwork 4はWindows XP等の古いOSには標準搭載されていないため、<br>
 https://www.microsoft.com/ja-jp/download/details.aspx?id=17718<br>
 こちらからインストールして利用してください。
-
+### Visual Studio2024でも以下の方法で開発できます。
 開発する際、Visual Studio 2022だと標準で対応していないため、<br>
 https://qiita.com/diontools/items/b193ae8394161fc26698#net-framework-4--45-%E3%81%AE%E5%A0%B4%E5%90%88<br>
 こちらを参考に導入してください。
